@@ -12,10 +12,12 @@ import { CnpjNotice } from './components/CnpjNotice';
 import { ContactForm } from './components/ContactForm';
 import { Footer } from './components/Footer';
 import { WhatsAppFloat } from './components/WhatsAppFloat';
+import { PrivacyModal } from './components/PrivacyModal';
 
 export function App() {
   useReveal();
   const [catalogFilter, setCatalogFilter] = useState('todos');
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
 
   return (
     <div className="relative overflow-x-clip min-h-screen selection:bg-cyan selection:text-navy">
@@ -34,11 +36,11 @@ export function App() {
         <CnpjNotice />
         <ContactForm />
       </main>
-      <Footer />
+      <Footer onOpenPrivacy={() => setIsPrivacyOpen(true)} />
       <WhatsAppFloat />
+      <PrivacyModal isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} />
     </div>
   );
 }
 
 export default App;
-

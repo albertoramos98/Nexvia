@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { SectionHeader } from './SectionHeader';
 import { Button } from './Button';
 import { WhatsAppIcon } from './Icons';
+import { trackConversion } from '../utils/analytics';
 import {
   CATEGORIES,
   PRODUCTS,
@@ -20,6 +21,14 @@ export function Catalog({ filter = 'todos', onFilterChange }) {
     { id: 'todos', label: 'Todos' },
     ...CATEGORIES.map((c) => ({ id: c.id, label: c.name }))
   ];
+
+  const handleProductWhatsApp = (product) => {
+    trackConversion('whatsapp_click_product', {
+      product: product.name,
+      category: product.category,
+      spec: product.spec
+    });
+  };
 
   return (
     <section id="catalogo" className="relative border-y border-border bg-navy-soft/40 py-20 sm:py-24">
@@ -123,6 +132,7 @@ export function Catalog({ filter = 'todos', onFilterChange }) {
                       href={getProductWhatsAppUrl(product.name)}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => handleProductWhatsApp(product)}
                     >
                       <WhatsAppIcon className="size-4" /> Pedir orçamento
                     </a>
@@ -136,4 +146,3 @@ export function Catalog({ filter = 'todos', onFilterChange }) {
     </section>
   );
 }
-

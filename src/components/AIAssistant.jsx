@@ -3,6 +3,7 @@ import { SectionHeader } from './SectionHeader';
 import { Button } from './Button';
 import { LoaderCircle, Sparkles, WhatsAppIcon } from './Icons';
 import { getProductImage, getProductWhatsAppUrl, getWhatsAppUrl, PRODUCTS } from '../data/products';
+import { trackConversion } from '../utils/analytics';
 
 export const PROMPT_EXAMPLES = [
   'Recepção de condomínio com muita gente entrando em dias de chuva.',
@@ -148,7 +149,16 @@ export function AIAssistant() {
       const rec = getSmartRecommendations(needs);
       setResult(rec);
       setLoading(false);
+      trackConversion('ai_assistant_query', { query: needs.slice(0, 80) });
     }, 700);
+  };
+
+  const handleRecommendationClick = (productName) => {
+    trackConversion('whatsapp_click_ai_rec', { product: productName });
+  };
+
+  const handleConsultantClick = () => {
+    trackConversion('whatsapp_click_ai_consultant', { query: needs.slice(0, 80) });
   };
 
   return (
@@ -262,6 +272,7 @@ export function AIAssistant() {
                           href={getProductWhatsAppUrl(item.name)}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={() => handleRecommendationClick(item.name)}
                           className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-cyan hover:underline"
                         >
                           <WhatsAppIcon className="size-4 shrink-0" /> Pedir orçamento
@@ -279,6 +290,7 @@ export function AIAssistant() {
                     href={getWhatsAppUrl(`Olá! Vim pelo site da Nexvia – Kapazi Cooperkap. Meu espaço: ${needs.trim()}`)}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={handleConsultantClick}
                   >
                     <WhatsAppIcon className="size-5" /> Falar com um consultor
                   </a>
@@ -291,4 +303,3 @@ export function AIAssistant() {
     </section>
   );
 }
-

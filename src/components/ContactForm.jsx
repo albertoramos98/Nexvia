@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SectionHeader } from './SectionHeader';
 import { Button } from './Button';
 import { ArrowRight, Mail, WhatsAppIcon } from './Icons';
+import { trackConversion } from '../utils/analytics';
 import {
   CATEGORIES,
   CONTACT_INFO,
@@ -51,6 +52,13 @@ export function ContactForm() {
   const handleWhatsAppSubmit = (e) => {
     e.preventDefault();
     if (!validate()) return;
+    
+    // Dispara evento de conversão de lead do formulário via WhatsApp
+    trackConversion('lead_form_whatsapp_submit', {
+      product: formData.product,
+      company: formData.company.trim()
+    });
+
     const text = buildMessageLines();
     const url = getWhatsAppUrl(text);
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -58,12 +66,27 @@ export function ContactForm() {
 
   const handleEmailSubmit = () => {
     if (!validate()) return;
+
+    // Dispara evento de conversão de lead do formulário via E-mail
+    trackConversion('lead_form_email_submit', {
+      product: formData.product,
+      company: formData.company.trim()
+    });
+
     const body = buildMessageLines();
     const subject = `Orçamento - ${formData.company.trim()} (${formData.product})`;
     const mailto = `mailto:${CONTACT_INFO.email}?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
     window.location.href = mailto;
+  };
+
+  const handleDirectWhatsAppCard = () => {
+    trackConversion('whatsapp_click_contact_card', { label: 'Card Direto Contato' });
+  };
+
+  const handleDirectEmailCard = () => {
+    trackConversion('email_click_contact_card', { label: 'Card Direto E-mail' });
   };
 
   const handleChange = (field) => (e) => {
@@ -95,6 +118,7 @@ export function ContactForm() {
               href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={handleDirectWhatsAppCard}
               className="group flex items-center gap-4 rounded-2xl border border-border bg-card-gradient p-4 transition-colors hover:border-whatsapp/60"
             >
               <span className="grid size-12 place-items-center rounded-xl bg-whatsapp text-whatsapp-foreground">
@@ -112,6 +136,7 @@ export function ContactForm() {
             {/* Email Card */}
             <a
               href={`mailto:${CONTACT_INFO.email}`}
+              onClick={handleDirectEmailCard}
               className="group flex items-center gap-4 rounded-2xl border border-border bg-card-gradient p-4 transition-colors hover:border-cyan/60"
             >
               <span className="bg-brand-gradient grid size-12 shrink-0 place-items-center rounded-xl text-navy">
@@ -234,4 +259,3 @@ export function ContactForm() {
     </section>
   );
 }
-

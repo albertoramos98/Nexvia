@@ -3,17 +3,21 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Nexvia Kapazi Cooperkap | Pisos, tapetes e revestimentos</title>
+    <title>Nexvia Kapazi Cooperkap | Pisos, tapetes e revestimentos em Recife</title>
     <meta name="theme-color" content="#00081C" />
     <meta name="author" content="Nexvia – Kapazi Cooperkap" />
     <meta
       name="description"
-      content="Distribuidores e representante oficial Kapazi Cooperkap, a maior indústria de tapetes da América Latina, em Recife e região metropolitana. Tapetes personalizados, pisos e grama sintética."
+      content="Distribuidor e representante oficial Kapazi Cooperkap em Recife e região. Tapetes personalizados com logo, pisos de alto tráfego, emborrachados, grama sintética e capachos para condomínios e empresas."
+    />
+    <meta
+      name="keywords"
+      content="tapetes personalizados recife, kapazi recife, capacho condomínio, tapete com logo pernambuco, pisos emborrachados academia, grama sintetica recife, piso tátil, acquakap, cooperkap"
     />
     <meta property="og:title" content="Nexvia Kapazi Cooperkap | Pisos, tapetes e revestimentos" />
     <meta
       property="og:description"
-      content="Distribuidores e representante oficial Kapazi Cooperkap, a maior indústria de tapetes da América Latina, em Recife e região metropolitana. Tapetes personalizados, pisos e grama sintética."
+      content="Distribuidor e representante oficial Kapazi Cooperkap em Recife e região metropolitana. Orçamento rápido para empresas e condomínios."
     />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
@@ -21,26 +25,56 @@
     <meta name="twitter:title" content="Nexvia Kapazi Cooperkap | Pisos, tapetes e revestimentos" />
     <meta
       name="twitter:description"
-      content="Distribuidores e representante oficial Kapazi Cooperkap, a maior indústria de tapetes da América Latina, em Recife e região metropolitana. Tapetes personalizados, pisos e grama sintética."
+      content="Distribuidor e representante oficial Kapazi Cooperkap em Recife e região metropolitana. Tapetes personalizados, pisos e grama sintética."
     />
+
+    <!-- Favicon & Ícones da Marca (NK) -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@1,700;1,800;1,900&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Preload de Imagens Críticas -->
     <link rel="preload" as="image" href="/assets/nexvia-logo-wide-BbbPYaBG.webp" />
     <link rel="preload" as="image" href="/assets/nexvia-logo-C1ilfo-y.webp" fetchpriority="high" />
     <link rel="preload" as="image" href="/assets/cleankap-BzrHMsYl.webp" />
     <link rel="preload" as="image" href="/assets/conectado-CN7pRizl.webp" />
     <link rel="preload" as="image" href="/assets/grama-esportiva-CtY_ZJ_L.webp" />
+
+    <!-- ======================================================== -->
+    <!-- CONFIGURAÇÃO DO GOOGLE ADS & GOOGLE TAG (gtag.js)        -->
+    <!-- Instruções no arquivo GOOGLE_ADS_GUIA.md                -->
+    <!-- ======================================================== -->
+    <script>
+      // Coloque aqui o ID da conta do Google Ads (ex: "AW-123456789")
+      window.GOOGLE_ADS_ID = "AW-SEU-ID-AQUI";
+
+      // Opcional: Rótulo de conversão para compra/lead (ex: "AbC_123xYz")
+      // window.GOOGLE_ADS_CONVERSION_LABEL = "SEU_ROTULO_DE_CONVERSAO";
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // Ativação automática caso o ID seja configurado
+      if (window.GOOGLE_ADS_ID && window.GOOGLE_ADS_ID !== "AW-SEU-ID-AQUI") {
+        gtag('config', window.GOOGLE_ADS_ID);
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.GOOGLE_ADS_ID;
+        document.head.appendChild(s);
+      }
+    </script>
   </head>
   <body class="bg-background text-foreground antialiased selection:bg-cyan selection:text-navy">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
-

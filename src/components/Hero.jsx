@@ -2,6 +2,7 @@ import React from 'react';
 import { LOGO_MAIN, getProductImage, getWhatsAppUrl } from '../data/products';
 import { Button } from './Button';
 import { ArrowRight, Swoosh, WhatsAppIcon } from './Icons';
+import { trackConversion } from '../utils/analytics';
 
 export function Hero() {
   const previewProducts = ['cleankap', 'conectado', 'grama-esportiva'];
@@ -10,6 +11,10 @@ export function Hero() {
     { value: '5', label: 'linhas de produto' },
     { value: '10 anos', label: 'de garantia máx.' }
   ];
+
+  const handleWhatsAppClick = () => {
+    trackConversion('whatsapp_click_hero', { label: 'Hero Principal' });
+  };
 
   return (
     <section id="inicio" className="bg-hero relative isolate overflow-hidden pt-24 pb-16 sm:pt-28 lg:pt-32 lg:pb-24">
@@ -51,7 +56,12 @@ export function Hero() {
             style={{ '--reveal-delay': '240ms' }}
           >
             <Button asChild variant="whatsapp" size="xl">
-              <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer">
+              <a
+                href={getWhatsAppUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleWhatsAppClick}
+              >
                 <WhatsAppIcon className="size-5" /> Falar no WhatsApp
               </a>
             </Button>
@@ -116,4 +126,3 @@ export function Hero() {
     </section>
   );
 }
-
